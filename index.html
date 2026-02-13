@@ -14,12 +14,15 @@
   <div class="card">
     <h2>Will you be my Valentine? 💘</h2>
     <p>I’m asking nicely.</p>
-    <button onclick="sayYes()">Yes 😭💖</button>
-    <button onclick="sayNo()">No 🙄</button>
+    <button onclick="sayYes()">Yes</button>
+    <button onclick="sayNo()">No</button>
     <p id="msg"></p>
   </div>
 
   <script>
+    window.onload = () => {
+    alert("Wait… before you scroll 😌💘");
+  };
     function sayYes() {
       document.getElementById('msg').textContent = "OK we’re official. When are we meeting? 🥰";
     }
