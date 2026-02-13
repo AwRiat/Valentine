@@ -1,34 +1,156 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Valentine?</title>
+  <title>Valentine Invite 💘</title>
   <style>
-    body { font-family: system-ui; display:flex; min-height:100vh; align-items:center; justify-content:center; background:#fff0f6; }
-    .card { background:white; padding:28px; border-radius:18px; box-shadow: 0 10px 30px rgba(0,0,0,.12); text-align:center; width:min(420px, 92vw); }
-    button { font-size:16px; padding:10px 16px; border-radius:12px; border:0; cursor:pointer; margin:8px; }
+    :root { --pad: 28px; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #fff0f6;
+      color: #111;
+    }
+    .page {
+      width: min(560px, 92vw);
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.12);
+      padding: var(--pad);
+      text-align: center;
+    }
+    h1 { margin: 0 0 10px; font-size: 28px; }
+    p  { margin: 0 0 18px; font-size: 16px; line-height: 1.45; }
+    .btnRow { display:flex; gap: 12px; justify-content:center; flex-wrap: wrap; margin-top: 10px; }
+    button {
+      border: 0;
+      border-radius: 14px;
+      padding: 12px 18px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0,0,0,.10);
+    }
+    button.primary { background: #ff4d8d; color: white; }
+    button.ghost   { background: #f3f4f6; color: #111; }
+
+    /* Hide/show pages */
+    .hidden { display: none; }
+
+    /* Full-screen image page */
+    .fullImage {
+      position: fixed;
+      inset: 0;
+      background: #000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .fullImage.show { display: flex; }
+    .fullImage img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .imgHint {
+      position: fixed;
+      left: 14px;
+      bottom: 14px;
+      background: rgba(0,0,0,.55);
+      color: white;
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: 13px;
+      max-width: min(520px, 92vw);
+    }
+
+    /* Tiny “code vibe” block */
+    pre {
+      text-align: left;
+      background: #0b1020;
+      color: #d6e1ff;
+      padding: 14px;
+      border-radius: 16px;
+      overflow: auto;
+      margin: 14px 0 0;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+    .muted { opacity: .75; }
   </style>
 </head>
+
 <body>
-  <div class="card">
-    <h2>Will you be my Valentine? 💘</h2>
-    <p>I’m asking nicely.</p>
-    <button onclick="sayYes()">Yes</button>
-    <button onclick="sayNo()">No</button>
-    <p id="msg"></p>
+
+  <!-- PAGE 1 -->
+  <div id="page1" class="page">
+    <h1>Hi. I’m your coder boyfriend 👨‍💻💘</h1>
+    <p>
+      I could’ve written a normal message…<br/>
+      but you know that’s not how I’m built.
+    </p>
+    <p class="muted">Click the button to continue. No bugs. Probably.</p>
+
+    <div class="btnRow">
+      <button class="primary" onclick="goToPage2()">OMG! 😳</button>
+    </div>
+
+    <pre>// init(valentine_protocol)
+if (you.click("OMG!")) {
+  nextPage();
+}</pre>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div id="page2" class="page hidden">
+    <h1>Question time 💞</h1>
+    <p>Will you be my Valentine?</p>
+
+    <div class="btnRow">
+      <button class="primary" onclick="yes()">Yes 💖</button>
+      <button class="ghost" onclick="no()">No 🙄</button>
+    </div>
+
+    <pre>// expected_output:
+Yes -> show surprise
+No  -> alert("Wrong answer. Try again.")</pre>
+  </div>
+
+  <!-- FULLSCREEN IMAGE (shown on YES) -->
+  <div id="fullImage" class="fullImage" aria-hidden="true">
+    <!-- Replace the src with YOUR image link or local file name -->
+    <img
+      src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=1400&q=80"
+      alt="Valentine Surprise"
+    />
+    <div class="imgHint">
+      💘 You said YES. (If you want, you can add text on the image in Canva, or I can code an overlay too.)
+    </div>
   </div>
 
   <script>
-    window.onload = () => {
-    alert("Wait… before you scroll 😌💘");
-  };
-    function sayYes() {
-      document.getElementById('msg').textContent = "OK we’re official. When are we meeting? 🥰";
+    function goToPage2() {
+      document.getElementById('page1').classList.add('hidden');
+      document.getElementById('page2').classList.remove('hidden');
+      window.scrollTo(0, 0);
     }
-    function sayNo() {
-      document.getElementById('msg').textContent = "That’s crazy. Try again. 😤";
+
+    function yes() {
+      // Show the full-screen image
+      const overlay = document.getElementById('fullImage');
+      overlay.classList.add('show');
+      overlay.setAttribute('aria-hidden', 'false');
+    }
+
+    function no() {
+      // Popup for wrong answer
+      alert("❌ Wrong answer. Try again. 😤💘");
     }
   </script>
+
 </body>
 </html>
