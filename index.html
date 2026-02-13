@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Valentine?</title>
+  <style>
+    body { font-family: system-ui; display:flex; min-height:100vh; align-items:center; justify-content:center; background:#fff0f6; }
+    .card { background:white; padding:28px; border-radius:18px; box-shadow: 0 10px 30px rgba(0,0,0,.12); text-align:center; width:min(420px, 92vw); }
+    button { font-size:16px; padding:10px 16px; border-radius:12px; border:0; cursor:pointer; margin:8px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Will you be my Valentine? 💘</h2>
+    <p>I’m asking nicely.</p>
+    <button onclick="sayYes()">Yes 😭💖</button>
+    <button onclick="sayNo()">No 🙄</button>
+    <p id="msg"></p>
+  </div>
+
+  <script>
+    function sayYes() {
+      document.getElementById('msg').textContent = "OK we’re official. When are we meeting? 🥰";
+    }
+    function sayNo() {
+      document.getElementById('msg').textContent = "That’s crazy. Try again. 😤";
+    }
+  </script>
+</body>
+</html>
